@@ -8,6 +8,8 @@ A native color picker for Flutter.
 
 Online Demo: https://rodydavis.github.io/native_color_picker/
 
+Currently only supports web!
+
 ## Getting Started
 
 ### Web
