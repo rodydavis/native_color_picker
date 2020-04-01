@@ -6,13 +6,16 @@ import 'impl.dart';
 class NativeColorPicker extends ColorPickerImpl {
   @override
   void pickColor(Function(Color) onChanged, [Color value]) async {
-    final element = html.InputElement(type: "color");
+    html.InputElement _colorElement = html.querySelector('#color-picker');
+    final element = _colorElement ?? html.InputElement(type: "color");
     if (value != null) {
       element.value = ColorPickerImpl.colorToString(value.value);
     } else {
       element.value = '#0000ff';
     }
     element.click();
+    element.select();
+    element.style.visibility = 'hidden';
     String _selectedColor;
     element.addEventListener('input', (event) {
       _updateColor(_selectedColor, event, onChanged);

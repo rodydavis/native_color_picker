@@ -10,6 +10,14 @@ Online Demo: https://rodydavis.github.io/native_color_picker/
 
 ## Getting Started
 
+### Web
+
+Add this line to the body so that the color picker will work in safari:
+
+```
+<input type="color" style="visibility:hidden;" id="color-picker" />
+```
+
 You will receive an event for every time the color changes.
 
 ```dart

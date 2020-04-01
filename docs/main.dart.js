@@ -21877,7 +21877,7 @@ S.GV.prototype={
 h:function(a){return"r: "+H.a(this.a)+", g: "+H.a(this.b)+", b: "+H.a(this.c)}}
 F.tF.prototype={
 K:function(a){var t=null
-return new S.mJ(new F.mX("Flutter Demo Home Page",t),"Flutter Demo",X.OO(t,C.kE),X.OO(C.K,t),!1,t)}}
+return new S.mJ(new F.mX("Color Picker Demo",t),"Native Color Picker",X.OO(t,C.kE),X.OO(C.K,t),!1,t)}}
 F.mX.prototype={
 aL:function(){return new F.p6(C.j,C.o)}}
 F.p6.prototype={
@@ -34534,14 +34534,18 @@ return!1}return!0}}
 Y.BE.prototype={}
 L.Fp.prototype={
 oG:function(a,b){return this.Hw(a,b)},
-Hw:function(a,b){var t=0,s=P.af(u.z),r=this,q
+Hw:function(a,b){var t=0,s=P.af(u.z),r=this,q,p,o
 var $async$oG=P.aa(function(c,d){if(c===1)return P.ac(d,s)
-while(true)switch(t){case 0:q=W.Ep("color")
-if(b!=null)q.value=Y.Vb(b.a)
-else q.value="#0000ff"
-q.click()
-C.fA.d7(q,"input",new L.Fq(r,null,a))
-C.fA.d7(q,"change",new L.Fr(r,null,a))
+while(true)switch(t){case 0:p=document.querySelector("#color-picker")
+o=p==null?W.Ep("color"):p
+if(b!=null)o.value=Y.Vb(b.a)
+else o.value="#0000ff"
+o.click()
+o.select()
+q=o.style
+q.visibility="hidden"
+C.fA.d7(o,"input",new L.Fq(r,null,a))
+C.fA.d7(o,"change",new L.Fr(r,null,a))
 return P.ad(null,s)}})
 return P.ae($async$oG,s)},
 tz:function(a,b,c){var t,s
