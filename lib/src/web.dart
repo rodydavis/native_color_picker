@@ -1,28 +1,47 @@
 import 'dart:ui';
 import 'dart:html' as html;
 
+import 'package:flutter/material.dart';
+
 import 'impl.dart';
 
 class NativeColorPicker extends ColorPickerImpl {
   @override
-  void pickColor(Function(Color) onChanged, [Color value]) async {
+  final Function(Color) onChanged;
+
+  @override
+  final String id;
+
+  NativeColorPicker({
+    @required this.id,
+    @required this.onChanged,
+  });
+
+  html.InputElement element;
+  String _selectedColor;
+
+  @override
+  void pickColor([Color value]) async {
+    element = null;
     html.InputElement _colorElement = html.querySelector('#color-picker');
-    final element = _colorElement ?? html.InputElement(type: "color");
+    element = _colorElement ?? html.InputElement(type: "color");
+    element.id = id;
     if (value != null) {
-      element.value = ColorPickerImpl.colorToString(value.value);
+      _selectedColor = ColorPickerImpl.colorToString(value.value);
     } else {
-      element.value = '#0000ff';
+      _selectedColor = '#0000ff';
     }
+    element.value = _selectedColor;
     element.click();
     element.select();
     element.style.visibility = 'hidden';
-    String _selectedColor;
-    element.addEventListener('input', (event) {
-      _updateColor(_selectedColor, event, onChanged);
-    });
-    element.addEventListener("change", (event) {
-      _updateColor(_selectedColor, event, onChanged);
-    });
+
+    element.addEventListener('input', _watch, false);
+    element.addEventListener("change", _watch, false);
+  }
+
+  void _watch(html.Event event) {
+    _updateColor(_selectedColor, event, onChanged);
   }
 
   void _updateColor(

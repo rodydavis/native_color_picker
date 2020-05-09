@@ -28,52 +28,48 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  Color _color = Colors.white;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  List<Color> _colors = [Colors.red];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _color,
       appBar: AppBar(
         title: Text(widget.title),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.palette),
-            onPressed: () {
-              NativeColorPicker().pickColor((color) {
-                if (mounted)
-                  setState(() {
-                    _color = color;
-                  });
-              }, _color);
-            },
-          )
+      ),
+      body: Wrap(
+        children: [
+          for (var i = 0; i < _colors.length; i++)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Material(
+                elevation: 10,
+                color: _colors[i],
+                child: InkWell(
+                  child: Icon(Icons.palette),
+                  onTap: () {
+                    NativeColorPicker(
+                      id: 'color_picker_$i',
+                      onChanged: (color) {
+                        if (mounted)
+                          setState(() {
+                            _colors[i] = color;
+                          });
+                      },
+                    ).pickColor(_colors[i]);
+                  },
+                ),
+              ),
+            ),
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: () {
+          if (mounted)
+            setState(() {
+              _colors.add(Colors.blue);
+            });
+        },
+        tooltip: 'Add Color',
         child: Icon(Icons.add),
       ),
     );

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:color/color.dart' as color;
 
 abstract class ColorPickerImpl {
-  void pickColor(Function(Color) onChanged, [Color value]);
+  Function(Color) get onChanged;
+  String get id;
+
+  void pickColor([Color value]);
 
   static String colorToString(int val) {
     final c = Color(val);
