@@ -1,5 +1,5 @@
-import 'dart:ui';
 import 'dart:html' as html;
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -7,37 +7,39 @@ import 'impl.dart';
 
 class NativeColorPicker extends ColorPickerImpl {
   @override
-  final Function(Color) onChanged;
+  final Function(Color? color) onChanged;
 
   @override
   final String id;
 
   NativeColorPicker({
-    @required this.id,
-    @required this.onChanged,
+    required this.id,
+    required this.onChanged,
   });
 
-  html.InputElement element;
-  String _selectedColor;
+  html.InputElement? element;
+  String? _selectedColor;
 
   @override
-  void pickColor([Color value]) async {
+  void pickColor([Color? value]) async {
     element = null;
-    html.InputElement _colorElement = html.querySelector('#color-picker');
-    element = _colorElement ?? html.InputElement(type: "color");
-    element.id = id;
+    final _colorElement = html.querySelector('#color-picker');
+    element = _colorElement is html.InputElement
+        ? _colorElement
+        : html.InputElement(type: "color");
+    element!.id = id;
     if (value != null) {
       _selectedColor = ColorPickerImpl.colorToString(value.value);
     } else {
       _selectedColor = '#0000ff';
     }
-    element.value = _selectedColor;
-    element.click();
-    element.select();
-    element.style.visibility = 'hidden';
+    element!.value = _selectedColor;
+    element!.click();
+    element!.select();
+    element!.style.visibility = 'hidden';
 
-    element.addEventListener('input', _watch, false);
-    element.addEventListener("change", _watch, false);
+    element!.addEventListener('input', _watch, false);
+    element!.addEventListener("change", _watch, false);
   }
 
   void _watch(html.Event event) {
@@ -45,7 +47,7 @@ class NativeColorPicker extends ColorPickerImpl {
   }
 
   void _updateColor(
-      String _selectedColor, html.Event event, onChanged(Color value)) {
+      String? _selectedColor, html.Event event, onChanged(Color? value)) {
     try {
       _selectedColor = (event.target as dynamic).value;
     } catch (e) {

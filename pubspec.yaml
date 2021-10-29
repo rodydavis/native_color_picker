@@ -1,21 +1,16 @@
 name: native_color_picker
 description: Picking a color natively on each platform.
-version: 1.0.1
-author: Rody Davis <rody.davis.jr@gmail.com>
+version: 2.0.0
 homepage: https://github.com/rodydavis/native_color_picker
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.14.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  color: ^2.1.1
-  # color_panel:
-  #   path: packages/color_panel
+  color: ^3.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-flutter:
