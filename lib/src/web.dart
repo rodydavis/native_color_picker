@@ -7,7 +7,7 @@ import 'impl.dart';
 
 class NativeColorPicker extends ColorPickerImpl {
   @override
-  final Function(Color? color) onChanged;
+  final Function(Color color) onChanged;
 
   @override
   final String id;
@@ -47,14 +47,15 @@ class NativeColorPicker extends ColorPickerImpl {
   }
 
   void _updateColor(
-      String? _selectedColor, html.Event event, onChanged(Color? value)) {
+      String? _selectedColor, html.Event event, onChanged(Color value)) {
     try {
       _selectedColor = (event.target as dynamic).value;
     } catch (e) {
       print('Error Picking Color: $e');
     }
-    if (_selectedColor != null) {
-      onChanged(ColorPickerImpl.colorFromString(_selectedColor));
+    final color = ColorPickerImpl.colorFromString(_selectedColor);
+    if (color != null) {
+      onChanged(color);
     }
   }
 }

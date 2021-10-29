@@ -2,7 +2,7 @@ import 'package:color/color.dart' as color;
 import 'package:flutter/material.dart';
 
 abstract class ColorPickerImpl {
-  Function(Color? color) get onChanged;
+  Function(Color color) get onChanged;
 
   String get id;
 

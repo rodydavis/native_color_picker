@@ -1,4 +1,3 @@
-// import 'dart:io';
 import 'dart:ui';
 
 // import 'package:color_panel/color_panel.dart';
@@ -9,7 +8,7 @@ import 'impl.dart';
 
 class NativeColorPicker extends ColorPickerImpl {
   @override
-  final Function(Color? color) onChanged;
+  final Function(Color color) onChanged;
 
   @override
   final String id;
