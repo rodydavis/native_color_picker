@@ -6,18 +6,18 @@ import 'impl.dart';
 
 class NativeColorPicker extends ColorPickerImpl {
   @override
-  final Function(Color) onChanged;
+  final Function(Color color) onChanged;
 
   @override
   final String id;
 
   NativeColorPicker({
-    @required this.id,
-    @required this.onChanged,
+    required this.id,
+    required this.onChanged,
   });
 
   @override
-  void pickColor([Color value]) async {
+  void pickColor([Color? value]) async {
     throw UnimplementedError('pickColor not supported');
   }
 }
